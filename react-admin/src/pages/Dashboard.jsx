@@ -32,6 +32,8 @@ export default function Dashboard() {
     totalBookings: 0,
     confirmedBookings: 0,
     pendingBookings: 0,
+    totalGuests: 0,
+    totalHotels: 0,
   }
 
   const bookingDistribution = useMemo(() => {
@@ -79,6 +81,16 @@ export default function Dashboard() {
           <div className="kpi-label">Total Bookings</div>
           <div className="kpi-value">{safeStats.totalBookings}</div>
           <div className="kpi-footer">All-time reservations</div>
+        </div>
+        <div className="dashboard-kpi-card kpi-guests">
+          <div className="kpi-label">Total Guests</div>
+          <div className="kpi-value">{safeStats.totalGuests}</div>
+          <div className="kpi-footer">Guest records in system</div>
+        </div>
+        <div className="dashboard-kpi-card kpi-hotels">
+          <div className="kpi-label">Total Hotels</div>
+          <div className="kpi-value">{safeStats.totalHotels}</div>
+          <div className="kpi-footer">Managed properties</div>
         </div>
       </div>
 

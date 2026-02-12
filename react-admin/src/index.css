@@ -606,6 +606,14 @@ select {
   background: linear-gradient(135deg, #1976d2, #64b5f6);
 }
 
+.kpi-guests {
+  background: linear-gradient(135deg, #9c27b0, #e91e63);
+}
+
+.kpi-hotels {
+  background: linear-gradient(135deg, #607d8b, #90a4ae);
+}
+
 .dashboard-main-row {
   display: grid;
   grid-template-columns: minmax(0, 2.1fr) minmax(0, 1.4fr) minmax(0, 1.4fr);

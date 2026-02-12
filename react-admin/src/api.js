@@ -71,6 +71,97 @@ export async function deleteCustomerApi(id) {
   }
 }
 
+// Guests
+export async function getGuests(params = {}) {
+  const q = new URLSearchParams(params).toString()
+  const r = await fetch(`${API}/guests${q ? '?' + q : ''}`)
+  const data = await r.json().catch(() => ({}))
+  if (!r.ok) throw new Error(data.error || 'Failed to fetch guests')
+  return data
+}
+
+export async function getGuest(id) {
+  const r = await fetch(`${API}/guests/${id}`)
+  const data = await r.json().catch(() => ({}))
+  if (!r.ok) throw new Error(data.error || 'Failed to fetch guest')
+  return data
+}
+
+export async function createGuestApi(payload) {
+  const r = await fetch(`${API}/guests`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
+  })
+  const data = await r.json().catch(() => ({}))
+  if (!r.ok) throw new Error(data.error || 'Failed to create guest')
+  return data
+}
+
+export async function updateGuestApi(id, payload) {
+  const r = await fetch(`${API}/guests/${id}`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
+  })
+  const data = await r.json().catch(() => ({}))
+  if (!r.ok) throw new Error(data.error || 'Failed to update guest')
+  return data
+}
+
+export async function deleteGuestApi(id) {
+  const r = await fetch(`${API}/guests/${id}`, { method: 'DELETE' })
+  if (!r.ok) {
+    const data = await r.json().catch(() => ({}))
+    throw new Error(data.error || 'Failed to delete guest')
+  }
+}
+
+// Hotels
+export async function getHotels() {
+  const r = await fetch(`${API}/hotels`)
+  const data = await r.json().catch(() => ({}))
+  if (!r.ok) throw new Error(data.error || 'Failed to fetch hotels')
+  return data
+}
+
+export async function getHotel(id) {
+  const r = await fetch(`${API}/hotels/${id}`)
+  const data = await r.json().catch(() => ({}))
+  if (!r.ok) throw new Error(data.error || 'Failed to fetch hotel')
+  return data
+}
+
+export async function createHotelApi(payload) {
+  const r = await fetch(`${API}/hotels`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
+  })
+  const data = await r.json().catch(() => ({}))
+  if (!r.ok) throw new Error(data.error || 'Failed to create hotel')
+  return data
+}
+
+export async function updateHotelApi(id, payload) {
+  const r = await fetch(`${API}/hotels/${id}`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
+  })
+  const data = await r.json().catch(() => ({}))
+  if (!r.ok) throw new Error(data.error || 'Failed to update hotel')
+  return data
+}
+
+export async function deleteHotelApi(id) {
+  const r = await fetch(`${API}/hotels/${id}`, { method: 'DELETE' })
+  if (!r.ok) {
+    const data = await r.json().catch(() => ({}))
+    throw new Error(data.error || 'Failed to delete hotel')
+  }
+}
+
 export async function getStats() {
   const r = await fetch(`${API}/stats`)
   if (!r.ok) throw new Error('Failed to fetch stats')
@@ -152,10 +243,33 @@ export async function getBookings(params = {}) {
   return data
 }
 
+export async function createBooking(payload) {
+  const r = await fetch(`${API}/bookings`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
+  })
+  const data = await r.json().catch(() => ({}))
+  if (!r.ok) throw new Error(data.error || 'Failed to create booking')
+  return data
+}
+
+export async function updateBooking(id, payload) {
+  const r = await fetch(`${API}/bookings/${id}`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
+  })
+  const data = await r.json().catch(() => ({}))
+  if (!r.ok) throw new Error(data.error || 'Failed to update booking')
+  return data
+}
+
 export async function updateBookingStatus(id, status) {
   const r = await fetch(`${API}/bookings/${id}`, { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ status }) })
-  if (!r.ok) throw new Error('Failed to update booking')
-  return r.json()
+  const data = await r.json().catch(() => ({}))
+  if (!r.ok) throw new Error(data.error || 'Failed to update booking')
+  return data
 }
 
 export async function deleteBooking(id) {

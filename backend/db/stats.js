@@ -14,7 +14,9 @@ export async function getStats() {
       (SELECT COUNT(*) FROM rooms WHERE available = 1) AS available_rooms,
       (SELECT COUNT(*) FROM bookings) AS total_bookings,
       (SELECT COUNT(*) FROM bookings WHERE status = 'confirmed') AS confirmed_bookings,
-      (SELECT COUNT(*) FROM bookings WHERE status = 'pending') AS pending_bookings
+      (SELECT COUNT(*) FROM bookings WHERE status = 'pending') AS pending_bookings,
+      (SELECT COUNT(*) FROM guests) AS total_guests,
+      (SELECT COUNT(*) FROM hotels) AS total_hotels
   `);
   const row = result.rows[0];
   return {
@@ -23,5 +25,7 @@ export async function getStats() {
     totalBookings: num(row, 'total_bookings'),
     confirmedBookings: num(row, 'confirmed_bookings'),
     pendingBookings: num(row, 'pending_bookings'),
+    totalGuests: num(row, 'total_guests'),
+    totalHotels: num(row, 'total_hotels'),
   };
 }

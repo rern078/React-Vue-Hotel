@@ -27,6 +27,8 @@ import { invoicesRouter } from './routes/invoices.js';
 import { paymentsRouter } from './routes/payments.js';
 import { housekeepingRouter } from './routes/housekeeping.js';
 import { auditLogsRouter } from './routes/audit-logs.js';
+import { guestsRouter } from './routes/guests.js';
+import { hotelsRouter } from './routes/hotels.js';
 
 const app = express();
 const PORT = 3001;
@@ -50,6 +52,8 @@ app.use('/api/payments', paymentsRouter);
 app.use('/api/housekeeping', housekeepingRouter);
 app.use('/api/audit-logs', auditLogsRouter);
 app.use('/api/bookings', bookingsRouter);
+app.use('/api/guests', guestsRouter);
+app.use('/api/hotels', hotelsRouter);
 app.use('/api/stats', statsRouter);
 
 app.get('/api/health', (_, res) => res.json({ ok: true }));

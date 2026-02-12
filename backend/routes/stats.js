@@ -17,6 +17,8 @@ statsRouter.get('/', async (req, res) => {
         totalBookings: 0,
         confirmedBookings: 0,
         pendingBookings: 0,
+        totalGuests: 0,
+        totalHotels: 0,
       });
     }
     res.status(500).json({ error: 'Failed to fetch stats' });

@@ -13,6 +13,8 @@ import Payments from './pages/Payments'
 import Housekeeping from './pages/Housekeeping'
 import AuditLogs from './pages/AuditLogs'
 import Customers from './pages/Customers'
+import Guests from './pages/Guests'
+import Hotels from './pages/Hotels'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import Roles from './pages/Roles'
@@ -187,6 +189,10 @@ export default function App() {
               </div>
               <div className="nav-section">
                 <div className="nav-section-label">MANAGEMENT</div>
+                <NavLink to="/hotels" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
+                  <IconRoom />
+                  <span>Hotels</span>
+                </NavLink>
                 <NavLink to="/rooms" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
                   <IconRoom />
                   <span>Rooms</span>
@@ -235,6 +241,10 @@ export default function App() {
                   <IconUser />
                   <span>Customers</span>
                 </NavLink>
+                <NavLink to="/guests" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
+                  <IconUser />
+                  <span>Guests</span>
+                </NavLink>
                 <NavLink to="/users" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
                   <IconUser />
                   <span>Users</span>
@@ -275,6 +285,7 @@ export default function App() {
           <main className="main">
             <Routes>
               <Route path="/" element={<Dashboard />} />
+              <Route path="/hotels" element={<Hotels />} />
               <Route path="/rooms" element={<Rooms />} />
               <Route path="/bookings" element={<Bookings />} />
               <Route path="/reservations" element={<Reservations />} />
@@ -287,6 +298,7 @@ export default function App() {
               <Route path="/housekeeping" element={<Housekeeping />} />
               <Route path="/audit-logs" element={<AuditLogs />} />
               <Route path="/customers" element={<Customers />} />
+              <Route path="/guests" element={<Guests />} />
               <Route path="/users" element={<Users />} />
               <Route path="/roles" element={<Roles />} />
             </Routes>

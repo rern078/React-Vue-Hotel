@@ -38,6 +38,23 @@ CREATE TABLE IF NOT EXISTS customers (
 
 CREATE INDEX idx_customers_email ON customers(email);
 
+-- Hotels
+CREATE TABLE IF NOT EXISTS hotels (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  hotel_code VARCHAR(50) NOT NULL UNIQUE,
+  hotel_name VARCHAR(255) NOT NULL,
+  address TEXT DEFAULT NULL,
+  postcode VARCHAR(20) DEFAULT NULL,
+  city VARCHAR(100) DEFAULT NULL,
+  country VARCHAR(100) DEFAULT NULL,
+  num_rooms INT DEFAULT NULL,
+  phone_no VARCHAR(30) DEFAULT NULL,
+  star_rating DECIMAL(2,1) DEFAULT NULL,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE INDEX idx_hotels_hotel_code ON hotels(hotel_code);
+
 CREATE TABLE IF NOT EXISTS room_types (
   id INT AUTO_INCREMENT PRIMARY KEY,
   type_name VARCHAR(50) NOT NULL,
@@ -76,6 +93,30 @@ CREATE INDEX idx_bookings_room_id ON bookings(room_id);
 CREATE INDEX idx_bookings_status ON bookings(status);
 CREATE INDEX idx_bookings_guest_email ON bookings(guest_email);
 CREATE INDEX idx_rooms_available ON rooms(available);
+
+-- Guests (per-booking guest details)
+CREATE TABLE IF NOT EXISTS guests (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  booking_id INT NOT NULL,
+  guest_title VARCHAR(20) DEFAULT NULL,
+  first_name VARCHAR(100) NOT NULL,
+  last_name VARCHAR(100) NOT NULL,
+  dob DATE DEFAULT NULL,
+  gender VARCHAR(10) DEFAULT NULL,
+  phone_no VARCHAR(30) DEFAULT NULL,
+  email VARCHAR(255) DEFAULT NULL,
+  password_hash VARCHAR(255) DEFAULT NULL,
+  passport_no VARCHAR(50) DEFAULT NULL,
+  address TEXT DEFAULT NULL,
+  postcode VARCHAR(20) DEFAULT NULL,
+  city VARCHAR(100) DEFAULT NULL,
+  country VARCHAR(100) DEFAULT NULL,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (booking_id) REFERENCES bookings(id) ON DELETE CASCADE
+);
+
+CREATE INDEX idx_guests_booking_id ON guests(booking_id);
+CREATE INDEX idx_guests_email ON guests(email);
 
 CREATE TABLE IF NOT EXISTS reservations (
   id INT AUTO_INCREMENT PRIMARY KEY,
