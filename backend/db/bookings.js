@@ -27,7 +27,7 @@ function rowToRoom(row) {
   return {
     id: String(row.id),
     name: row.name,
-    type: row.type,
+    type: row.room_type_id ?? row.type,
     price: row.price,
     capacity: row.capacity,
     amenities: Array.isArray(row.amenities) ? row.amenities : (row.amenities ? (typeof row.amenities === 'string' ? JSON.parse(row.amenities) : row.amenities) : []),
@@ -38,7 +38,7 @@ function rowToRoom(row) {
 
 export async function getBookings(filters = {}) {
   let sql = `
-    SELECT b.*, r.id AS room_id, r.name AS room_name, r.type AS room_type, r.price AS room_price,
+    SELECT b.*, r.id AS room_id, r.name AS room_name, r.room_type_id AS room_type_id, r.price AS room_price,
            r.capacity AS room_capacity, r.amenities AS room_amenities, r.image AS room_image, r.available AS room_available
     FROM bookings b
     JOIN rooms r ON r.id = b.room_id
@@ -63,7 +63,7 @@ export async function getBookings(filters = {}) {
     const room = rowToRoom({
       id: row.room_id,
       name: row.room_name,
-      type: row.room_type,
+      room_type_id: row.room_type_id,
       price: row.room_price,
       capacity: row.room_capacity,
       amenities: row.room_amenities,
@@ -88,7 +88,7 @@ export async function getBookings(filters = {}) {
 
 export async function getBookingById(id) {
   const result = await query(
-    `SELECT b.*, r.id AS room_id, r.name AS room_name, r.type AS room_type, r.price AS room_price,
+    `SELECT b.*, r.id AS room_id, r.name AS room_name, r.room_type_id AS room_type_id, r.price AS room_price,
             r.capacity AS room_capacity, r.amenities AS room_amenities, r.image AS room_image, r.available AS room_available
      FROM bookings b
      JOIN rooms r ON r.id = b.room_id
@@ -100,7 +100,7 @@ export async function getBookingById(id) {
   const room = rowToRoom({
     id: row.room_id,
     name: row.room_name,
-    type: row.room_type,
+    room_type_id: row.room_type_id,
     price: row.room_price,
     capacity: row.room_capacity,
     amenities: row.room_amenities,

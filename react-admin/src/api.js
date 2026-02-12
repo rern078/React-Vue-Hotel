@@ -147,8 +147,9 @@ export async function deleteRoomType(id) {
 export async function getBookings(params = {}) {
   const q = new URLSearchParams(params).toString()
   const r = await fetch(`${API}/bookings${q ? '?' + q : ''}`)
-  if (!r.ok) throw new Error('Failed to fetch bookings')
-  return r.json()
+  const data = await r.json().catch(() => ({}))
+  if (!r.ok) throw new Error(data.error || 'Failed to fetch bookings')
+  return data
 }
 
 export async function updateBookingStatus(id, status) {
