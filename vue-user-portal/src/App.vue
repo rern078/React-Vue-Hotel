@@ -1,17 +1,18 @@
 <template>
-  <div>
-    <header class="header">
-      <h1>Hotel</h1>
-      <nav>
-        <router-link to="/">Rooms</router-link>
-        <router-link to="/my-bookings">My Bookings</router-link>
-      </nav>
-    </header>
-    <main class="container">
-      <router-view />
-    </main>
-  </div>
+  <SiteHeader />
+  <router-view />
+  <SiteFooter />
 </template>
 
-<script setup>
+<script>
+import SiteHeader from './components/SiteHeader.vue';
+import SiteFooter from './components/SiteFooter.vue';
+
+export default {
+  name: 'App',
+  components: {
+    SiteHeader,
+    SiteFooter,
+  },
+};
 </script>
